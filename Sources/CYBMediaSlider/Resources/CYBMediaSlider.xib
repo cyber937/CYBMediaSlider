@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="19455" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19455"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="CYBMediaSlider" customModule="CYBMediaSlider_Master" customModuleProvider="target">
+            <connections>
+                <outlet property="mainSlider" destination="a1l-fZ-aKR" id="dp2-u0-pDN"/>
+                <outlet property="rangeSlider" destination="X7h-Ua-bbr" id="vJg-Jk-gj9"/>
+                <outlet property="view" destination="c22-O7-iKe" id="ogo-HF-GjY"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="c22-O7-iKe">
+            <rect key="frame" x="0.0" y="0.0" width="538" height="31"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+            <subviews>
+                <customView translatesAutoresizingMaskIntoConstraints="NO" id="X7h-Ua-bbr" userLabel="Range Slider" customClass="CYBRangeSlider" customModule="CYBMediaSlider">
+                    <rect key="frame" x="0.0" y="17" width="538" height="14"/>
+                </customView>
+                <customView translatesAutoresizingMaskIntoConstraints="NO" id="a1l-fZ-aKR" customClass="CYBMainSlider" customModule="CYBMediaSlider">
+                    <rect key="frame" x="0.0" y="0.0" width="538" height="17"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="17" id="Hla-ko-C7J"/>
+                    </constraints>
+                </customView>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="X7h-Ua-bbr" secondAttribute="trailing" id="1hC-Iu-MKG"/>
+                <constraint firstAttribute="trailing" secondItem="a1l-fZ-aKR" secondAttribute="trailing" id="3TQ-d5-7mq"/>
+                <constraint firstItem="X7h-Ua-bbr" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" id="CBK-9h-FiX"/>
+                <constraint firstItem="a1l-fZ-aKR" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" id="HVQ-kd-VxQ"/>
+                <constraint firstItem="a1l-fZ-aKR" firstAttribute="top" secondItem="X7h-Ua-bbr" secondAttribute="bottom" id="Ztz-bd-Jd6"/>
+                <constraint firstItem="X7h-Ua-bbr" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" id="f7r-mv-YjT"/>
+                <constraint firstAttribute="bottom" secondItem="a1l-fZ-aKR" secondAttribute="bottom" id="mTA-fl-o63"/>
+            </constraints>
+            <point key="canvasLocation" x="94" y="27.5"/>
+        </customView>
+    </objects>
+</document>
