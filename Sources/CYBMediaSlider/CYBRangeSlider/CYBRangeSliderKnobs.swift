@@ -15,7 +15,7 @@ class CYBRangeSliderKnobInPoint: NSControl {
     var maxPoint: CGFloat = 0
     
     var minValue: CGFloat = 0
-    var maxValue: CGFloat = 0
+    var maxValue: CGFloat = 100
     
     var _value: CGFloat = 0
     
@@ -113,9 +113,9 @@ class CYBRangeSliderKnobOutPoint: NSControl {
     var maxPoint: CGFloat = 0
     
     var minValue: CGFloat = 0
-    var maxValue: CGFloat = 0
+    var maxValue: CGFloat = 100
     
-    var _value: CGFloat = 0
+    var _value: CGFloat = 100
     
     var value : CGFloat {
         get {

@@ -36,7 +36,7 @@ class CYBRangeSlider: NSView {
         }
     }
     
-    var maxValue: CGFloat = 10 {
+    var maxValue: CGFloat = 0 {
         didSet {
             rangeSliderKnobInPoint.maxValue = maxValue
             rangeSliderKnobOutPoint.maxValue = maxValue
@@ -51,7 +51,7 @@ class CYBRangeSlider: NSView {
         }
     }
 
-    var outPointValue: CGFloat = 0 {
+    var outPointValue: CGFloat = 100 {
         didSet {
             rangeSliderLine.frame.origin.x = rangeSliderKnobInPoint.frame.origin.x + rangeSliderKnobInPoint.frame.width
             rangeSliderLine.frame.size.width = rangeSliderKnobOutPoint.frame.origin.x - rangeSliderLine.frame.origin.x

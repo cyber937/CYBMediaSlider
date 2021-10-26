@@ -14,7 +14,7 @@ class CYBMainSlider: NSControl, CYBRangeKnobsDelegate {
     var mainSliderknob: CYBMainSliderKnob!
     
     var minValue: CGFloat = 0
-    var maxValue: CGFloat = 500 // default max value is 100
+    var maxValue: CGFloat = 100 // default max value is 100
     
     var minPoint: CGFloat = 0
     var maxPoint: CGFloat = 0 // default max point is 100
@@ -104,7 +104,8 @@ class CYBMainSlider: NSControl, CYBRangeKnobsDelegate {
         
         // Assign _value
         _value = ((mousePosition - minPoint)  /  (maxPoint - minPoint) * maxValue).rounded()
-        //if _value == maxValue { return }
+        
+        if _value == maxValue { return }
 
         mainSliderknob.frame.origin.x = ((maxPoint - minPoint) * (_value / maxValue) + minPoint).rounded() - 4
 
