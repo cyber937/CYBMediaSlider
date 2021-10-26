@@ -62,10 +62,10 @@ public class CYBMediaSlider: NSControl {
         
         set (newValue) {
             _inPointValue = newValue
-            rangeSlider.rangeMinKnob.value = newValue
+            rangeSlider.rangeSliderKnobInPoint.value = newValue
             
-            if newValue >= rangeSlider.rangeMaxKnob.value {
-                rangeSlider.rangeMaxKnob.value = maxValue
+            if newValue >= rangeSlider.rangeSliderKnobOutPoint.value {
+                rangeSlider.rangeSliderKnobOutPoint.value = maxValue
             }
         }
     }
@@ -80,10 +80,10 @@ public class CYBMediaSlider: NSControl {
         
         set (newValue) {
             _outPointValue = newValue
-            rangeSlider.rangeMaxKnob.value = newValue
+            rangeSlider.rangeSliderKnobOutPoint.value = newValue
             
-            if newValue <= rangeSlider.rangeMinKnob.value {
-                rangeSlider.rangeMinKnob.value = minValue
+            if newValue <= rangeSlider.rangeSliderKnobInPoint.value {
+                rangeSlider.rangeSliderKnobInPoint.value = minValue
             }
         }
     }
@@ -133,11 +133,11 @@ public class CYBMediaSlider: NSControl {
         mainSlider.target = self
         mainSlider.action = #selector(mainSliderValueChanged)
         
-        rangeSlider.rangeMinKnob.target = self
-        rangeSlider.rangeMinKnob.action = #selector(inPointValueChanged)
+        rangeSlider.rangeSliderKnobInPoint.target = self
+        rangeSlider.rangeSliderKnobInPoint.action = #selector(inPointValueChanged)
         
-        rangeSlider.rangeMaxKnob.target = self
-        rangeSlider.rangeMaxKnob.action = #selector(outPointValueChanged)
+        rangeSlider.rangeSliderKnobOutPoint.target = self
+        rangeSlider.rangeSliderKnobOutPoint.action = #selector(outPointValueChanged)
         
         rangeSlider.rangeKnobsDelegate = mainSlider
     }
@@ -196,7 +196,7 @@ public class CYBMediaSlider: NSControl {
     }
     
     @objc func inPointValueChanged() {
-        _inPointValue = rangeSlider.rangeMinKnob.value
+        _inPointValue = rangeSlider.rangeSliderKnobInPoint.value
         
         guard let observedObjectForSliderInPoint = observedObjectForSliderInPoint as? NSObject else { return }
         observedObjectForSliderInPoint.setValue(_inPointValue, forKey: observedKeyPathForSliderInPoint)
@@ -205,7 +205,7 @@ public class CYBMediaSlider: NSControl {
     }
     
     @objc func outPointValueChanged() {
-        _outPointValue = rangeSlider.rangeMaxKnob.value
+        _outPointValue = rangeSlider.rangeSliderKnobOutPoint.value
         
         guard let observedObjectForSliderOutPoint = observedObjectForSliderOutPoint as? NSObject else { return }
         observedObjectForSliderOutPoint.setValue(_outPointValue, forKey: observedKeyPathForSliderOutPoint)

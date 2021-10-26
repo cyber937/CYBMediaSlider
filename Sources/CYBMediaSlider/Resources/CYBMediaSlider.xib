@@ -6,7 +6,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="CYBMediaSlider" customModule="CYBMediaSlider_Master" customModuleProvider="target">
+        <customObject id="-2" userLabel="File's Owner" customClass="CYBMediaSlider" customModule="CYBMediaSlider">
             <connections>
                 <outlet property="mainSlider" destination="a1l-fZ-aKR" id="dp2-u0-pDN"/>
                 <outlet property="rangeSlider" destination="X7h-Ua-bbr" id="vJg-Jk-gj9"/>
