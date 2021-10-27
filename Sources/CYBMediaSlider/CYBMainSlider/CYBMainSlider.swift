@@ -43,7 +43,7 @@ class CYBMainSlider: NSControl, CYBRangeKnobsDelegate {
         
         set (newValue) {
             _value = newValue
-            mainSliderknob.frame.origin.x = ((maxPoint - minPoint) * (_value / maxValue) + minPoint).rounded()
+            mainSliderknob.frame.origin.x = ((maxPoint - minPoint) * (_value / maxValue) + minPoint).rounded() - 4
 
         }
     }
