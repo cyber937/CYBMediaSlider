@@ -51,7 +51,6 @@ class CYBMainSlider: NSControl, CYBRangeKnobsDelegate {
     // Everytime when this view's size is updated, this method is triggered.
     override var frame: NSRect {
         didSet {
-
             // Calcurate maxPoint (subtract 'minPoint' and '8' from this view's frame)
             maxPoint = frame.size.width - minPoint - 8.0
 
@@ -59,7 +58,7 @@ class CYBMainSlider: NSControl, CYBRangeKnobsDelegate {
             mainSliderLine.frame.size.width = maxPoint - 8.0
             
             // Update the location of mainSliderKnob
-            mainSliderknob.frame.origin.x = (maxPoint - minPoint) * (value / maxValue) + minPoint - 4
+            mainSliderknob.frame.origin.x = ((maxPoint - minPoint) * (_value / maxValue) + minPoint).rounded() - 4
         }
     }
     
@@ -105,7 +104,10 @@ class CYBMainSlider: NSControl, CYBRangeKnobsDelegate {
         // Assign _value
         _value = ((mousePosition - minPoint)  /  (maxPoint - minPoint) * maxValue).rounded()
         
-        if _value == maxValue { return }
+        if _value == maxValue {
+            _value = maxValue - 1
+            return
+        }
 
         mainSliderknob.frame.origin.x = ((maxPoint - minPoint) * (_value / maxValue) + minPoint).rounded() - 4
 
