@@ -104,6 +104,7 @@ class CYBMainSlider: NSControl, CYBRangeKnobsDelegate {
         // Assign _value
         _value = ((mousePosition - minPoint)  /  (maxPoint - minPoint) * maxValue).rounded()
         
+        // some comments
         if _value == maxValue {
             _value = maxValue - 1
             return
