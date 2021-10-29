@@ -79,8 +79,8 @@ class CYBRangeSliderKnobInPoint: NSControl {
         let mousePosition = dragLocation.x.rounded() + 4
         
         // Check the new position is not less than the minPoint and does not exceed maxPoint
-        guard mousePosition > minPoint,
-              mousePosition < maxPoint else { return }
+        guard mousePosition >= minPoint,
+              mousePosition <= maxPoint else { return }
         
         // Assign calculated number to _value
         _value = ((mousePosition - minPoint) / (maxPoint - minPoint) * maxValue).rounded()
@@ -175,8 +175,8 @@ class CYBRangeSliderKnobOutPoint: NSControl {
         let mousePosition = dragLocation.x.rounded() - 4
         
         // Check the new position is not less than the minPoint and does not exceed maxPoint
-        guard mousePosition > minPoint,
-              mousePosition < maxPoint else { return }
+        guard mousePosition >= minPoint,
+              mousePosition <= maxPoint else { return }
         
         // Assign calculated number to _value
         _value = ((mousePosition - minPoint) / (maxPoint - minPoint) * maxValue).rounded()

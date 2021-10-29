@@ -98,8 +98,8 @@ class CYBMainSlider: NSControl, CYBRangeKnobsDelegate {
         let mousePosition = dragLocation.x.rounded()
         
         // Make mousePosition's limit in between "minPoint" and "maxPoint"
-        guard mousePosition > minPoint,
-              mousePosition < maxPoint else { return }
+        guard mousePosition >= minPoint,
+              mousePosition <= maxPoint else { return }
         
         // Assign _value
         _value = ((mousePosition - minPoint)  /  (maxPoint - minPoint) * maxValue).rounded()
