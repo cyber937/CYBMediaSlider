@@ -8,7 +8,11 @@
 
 import Cocoa
 
-@IBDesignable
+@objc protocol CYBRangeKnobsDelegate: AnyObject {
+    func didUpdateMinKnobPosition(_ position: CGFloat)
+    func didUpdateMaxKnobPosition(_ position: CGFloat)
+}
+
 class CYBRangeSlider: NSView {
     
     var rangeSliderKnobInPoint: CYBRangeSliderKnobInPoint!
@@ -45,6 +49,7 @@ class CYBRangeSlider: NSView {
     
     var inPointValue: CGFloat = 0 {
         didSet {
+            rangeSliderKnobInPoint.value = inPointValue
             rangeSliderLine.frame.origin.x = rangeSliderKnobInPoint.frame.origin.x + rangeSliderKnobInPoint.frame.width
             rangeSliderLine.frame.size.width = rangeSliderKnobOutPoint.frame.origin.x - rangeSliderLine.frame.origin.x
             rangeKnobsDelegate?.didUpdateMinKnobPosition(rangeSliderKnobInPoint.frame.origin.x)
@@ -53,6 +58,7 @@ class CYBRangeSlider: NSView {
 
     var outPointValue: CGFloat = 100 {
         didSet {
+            rangeSliderKnobOutPoint.value = outPointValue
             rangeSliderLine.frame.origin.x = rangeSliderKnobInPoint.frame.origin.x + rangeSliderKnobInPoint.frame.width
             rangeSliderLine.frame.size.width = rangeSliderKnobOutPoint.frame.origin.x - rangeSliderLine.frame.origin.x
             rangeKnobsDelegate?.didUpdateMaxKnobPosition(frame.size.width - rangeSliderKnobOutPoint.frame.origin.x - rangeSliderKnobOutPoint.frame.size.width)
@@ -95,8 +101,8 @@ class CYBRangeSlider: NSView {
             
             rangeSliderLine.frame.size.width = maxPoint - 8.0
 
-            rangeSliderKnobInPoint.uploadKnobPosition()
-            rangeSliderKnobOutPoint.uploadKnobPosition()
+            rangeSliderKnobInPoint.updateKnobPosition()
+            rangeSliderKnobOutPoint.updateKnobPosition()
 
             // Line update
             rangeSliderLine.frame.origin.x = rangeSliderKnobInPoint.frame.origin.x + rangeSliderKnobInPoint.frame.width
@@ -129,9 +135,4 @@ class CYBRangeSlider: NSView {
         addSubview(rangeSliderKnobInPoint)
         addSubview(rangeSliderKnobOutPoint)
     }
-}
-
-@objc protocol CYBRangeKnobsDelegate: AnyObject {
-    func didUpdateMinKnobPosition(_ position: CGFloat)
-    func didUpdateMaxKnobPosition(_ position: CGFloat)
 }

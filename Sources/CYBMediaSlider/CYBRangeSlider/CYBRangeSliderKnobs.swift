@@ -11,24 +11,15 @@ class CYBRangeSliderKnobInPoint: NSControl {
     
     var maxKnob: CYBRangeSliderKnobOutPoint?
     
-    var minPoint: CGFloat = 0
-    var maxPoint: CGFloat = 0
+    var minPoint: CGFloat = 0.0
+    var maxPoint: CGFloat = 0.0
     
-    var minValue: CGFloat = 0
-    var maxValue: CGFloat = 100
+    var minValue: CGFloat = 0.0
+    var maxValue: CGFloat = 100.0
     
-    var _value: CGFloat = 0
-    
-    var value : CGFloat {
-        get {
-            return _value
-        }
-        
-        set (newValue) {
-            _value = newValue
-            uploadKnobPosition()
-            guard let rangeSlider = superview as? CYBRangeSlider else { return }
-            rangeSlider.inPointValue = newValue
+    var value : CGFloat = 0.0 {
+        didSet {
+            updateKnobPosition()
         }
     }
     
@@ -83,23 +74,20 @@ class CYBRangeSliderKnobInPoint: NSControl {
               mousePosition <= maxPoint else { return }
         
         // Assign calculated number to _value
-        _value = ((mousePosition - minPoint) / (maxPoint - minPoint) * maxValue).rounded()
+        let newValue = ((mousePosition - minPoint) / (maxPoint - minPoint) * maxValue).rounded()
         
         // Check the _value does not exceed maxKnob value
         guard let maxKnobValue = maxKnob?.value,
-              maxKnobValue > _value else { return }
+              maxKnobValue > newValue else { return }
         
-        uploadKnobPosition()
-        
-        guard let rangeSlider = superview as? CYBRangeSlider else { return }
-        rangeSlider.inPointValue = _value
+        value = newValue
         
         let _ = sendAction(action, to: target)
     }
     
-    func uploadKnobPosition() {
+    func updateKnobPosition() {
         // Assign calculated number to the view's center position
-        frame.origin.x = ((maxPoint - minPoint) * (_value / maxValue) + minPoint).rounded() - 8
+        frame.origin.x = ((maxPoint - minPoint) * (value / maxValue) + minPoint).rounded() - 8
     }
 }
 
@@ -109,24 +97,15 @@ class CYBRangeSliderKnobOutPoint: NSControl {
     
     var minKnob: CYBRangeSliderKnobInPoint?
     
-    var minPoint: CGFloat = 0
-    var maxPoint: CGFloat = 0
+    var minPoint: CGFloat = 0.0
+    var maxPoint: CGFloat = 0.0
     
-    var minValue: CGFloat = 0
-    var maxValue: CGFloat = 100
+    var minValue: CGFloat = 0.0
+    var maxValue: CGFloat = 100.0
     
-    var _value: CGFloat = 100
-    
-    var value : CGFloat {
-        get {
-            return _value
-        }
-        
-        set (newValue){
-            _value = newValue
-            uploadKnobPosition()
-            guard let rangeSlider = superview as? CYBRangeSlider else { return }
-            rangeSlider.outPointValue = _value
+    var value : CGFloat = 100.0 {
+        didSet {
+            updateKnobPosition()
         }
     }
     
@@ -179,23 +158,20 @@ class CYBRangeSliderKnobOutPoint: NSControl {
               mousePosition <= maxPoint else { return }
         
         // Assign calculated number to _value
-        _value = ((mousePosition - minPoint) / (maxPoint - minPoint) * maxValue).rounded()
+        let newValue = ((mousePosition - minPoint) / (maxPoint - minPoint) * maxValue).rounded()
     
         // Check the _value does not exceed maxKnob value
         guard let minKnobValue = minKnob?.value,
-              minKnobValue < _value else { return }
+              minKnobValue < newValue else { return }
         
-        uploadKnobPosition()
-        
-        guard let rangeSlider = superview as? CYBRangeSlider else { return }
-        rangeSlider.outPointValue = _value
+        value = newValue
         
         let _ = sendAction(action, to: target)
     }
     
-    func uploadKnobPosition() {
+    func updateKnobPosition() {
         // Assign calculated number to the view's center position
-        frame.origin.x = ((maxPoint - minPoint) * (_value / maxValue) + minPoint).rounded()
+        frame.origin.x = ((maxPoint - minPoint) * (value / maxValue) + minPoint).rounded()
     }
     
     override func mouseUp(with event: NSEvent) {

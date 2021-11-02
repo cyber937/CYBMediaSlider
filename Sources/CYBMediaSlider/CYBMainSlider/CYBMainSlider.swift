@@ -32,19 +32,11 @@ class CYBMainSlider: NSControl, CYBRangeKnobsDelegate {
             mainSliderLine.isEnabled = isEnabled
         }
     }
-    
-    var _value: CGFloat = 0
-    
-    // This value is actual value.
-    var value : CGFloat {
-        get {
-            return _value
-        }
-        
-        set (newValue) {
-            _value = newValue
-            mainSliderknob.frame.origin.x = ((maxPoint - minPoint) * (_value / maxValue) + minPoint).rounded() - 4
 
+    // This value is actual value.
+    var value : CGFloat = 0 {
+        didSet {
+            mainSliderknob.frame.origin.x = ((maxPoint - minPoint) * (value / maxValue) + minPoint).rounded() - 4
         }
     }
     
@@ -58,7 +50,7 @@ class CYBMainSlider: NSControl, CYBRangeKnobsDelegate {
             mainSliderLine.frame.size.width = maxPoint - 8.0
             
             // Update the location of mainSliderKnob
-            mainSliderknob.frame.origin.x = ((maxPoint - minPoint) * (_value / maxValue) + minPoint).rounded() - 4
+            mainSliderknob.frame.origin.x = ((maxPoint - minPoint) * (value / maxValue) + minPoint).rounded() - 4
         }
     }
     
@@ -102,15 +94,17 @@ class CYBMainSlider: NSControl, CYBRangeKnobsDelegate {
               mousePosition <= maxPoint else { return }
         
         // Assign _value
-        _value = ((mousePosition - minPoint)  /  (maxPoint - minPoint) * maxValue).rounded()
+        var newValue = ((mousePosition - minPoint)  /  (maxPoint - minPoint) * maxValue).rounded()
         
         // some comments
-        if _value == maxValue {
-            _value = maxValue - 1
+        if newValue == maxValue {
+            newValue = maxValue - 1
             return
         }
 
-        mainSliderknob.frame.origin.x = ((maxPoint - minPoint) * (_value / maxValue) + minPoint).rounded() - 4
+        value = newValue
+        
+        mainSliderknob.frame.origin.x = ((maxPoint - minPoint) * (value / maxValue) + minPoint).rounded() - 4
 
         let _ = sendAction(action, to: target)
     }
