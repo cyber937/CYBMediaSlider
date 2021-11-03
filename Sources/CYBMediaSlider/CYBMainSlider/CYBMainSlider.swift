@@ -105,7 +105,7 @@ class CYBMainSlider: NSControl {
         addSubview(rangeInKnob)
         addSubview(rangeOutKnob)
         
-        mainSliderknob = CYBMainSliderKnob(frame: NSMakeRect(0.0, 7, 8.0, 12))
+        mainSliderknob = CYBMainSliderKnob(frame: NSMakeRect(0.0, 7, 8.0, 13))
         
         addSubview(mainSliderknob)
     }
