@@ -105,30 +105,34 @@ class CYBMainSlider: NSControl {
         addSubview(rangeInKnob)
         addSubview(rangeOutKnob)
         
-        
         mainSliderknob = CYBMainSliderKnob(frame: NSMakeRect(0.0, 7, 8.0, 12))
         
         addSubview(mainSliderknob)
     }
     
     override func mouseDown(with event: NSEvent) {
-        let clickedLocation = self.convert(event.locationInWindow, from: nil)
-        let clickedMouseYPosition =  clickedLocation.y
-        
-        if clickedMouseYPosition >= 7 {
-            mouseRightPlaceToClicked = true
+        if isEditabled {
+            let clickedLocation = self.convert(event.locationInWindow, from: nil)
+            let clickedMouseYPosition =  clickedLocation.y
+            
+            if clickedMouseYPosition >= 7 {
+                mouseRightPlaceToClicked = true
+            }
         }
     }
     
     override func mouseUp(with event: NSEvent) {
-        mouseRightPlaceToClicked = false
+        if isEditabled {
+            mouseRightPlaceToClicked = false
+        }
     }
     
     override func mouseDragged(with event: NSEvent) {
-        
-        if mouseRightPlaceToClicked {
-            if isEditabled {
-                updatingSliderKnobPotision(with: event)
+        if isEditabled {
+            if mouseRightPlaceToClicked {
+                if isEditabled {
+                    updatingSliderKnobPotision(with: event)
+                }
             }
         }
     }

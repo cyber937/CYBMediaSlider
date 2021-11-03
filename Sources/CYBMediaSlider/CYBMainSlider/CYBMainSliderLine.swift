@@ -12,21 +12,20 @@ class CYBMainSliderLine: NSView {
     var minKnobPosition: CGFloat = 0
     var maxKnobPosition: CGFloat = 0
 
-    var isEditabled: Bool = true{
+    var isEditabled: Bool = true {
         didSet {
-            needsDisplay = true
+            needsDisplay = isEditabled
         }
     }
-    
+
     var isEnabled: Bool = true {
         didSet {
-            needsDisplay = true
+            needsDisplay = isEditabled
         }
     }
     
     override func draw(_ dirtyRect: NSRect) {
         super.draw(dirtyRect)
-        
         
         var lightGray = NSColor(red: 0.619, green: 0.619, blue: 0.619, alpha: 1)
         

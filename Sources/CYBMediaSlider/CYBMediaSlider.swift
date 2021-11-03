@@ -53,6 +53,7 @@ public class CYBMediaSlider: NSControl {
     
     public override var isEnabled: Bool {
         didSet {
+            mainSlider.isEditabled = isEnabled
             mainSlider.isEnabled = isEnabled
         }
     }
