@@ -9,7 +9,7 @@ import Cocoa
 
 class CYBRangeSliderKnobInPoint: NSControl {
     
-    var maxKnob: CYBRangeSliderKnobOutPoint?
+    var maxKnob: CYBRangeSliderKnobOutPoint!
     
     var minPoint: CGFloat = 0.0
     var maxPoint: CGFloat = 0.0
@@ -38,7 +38,7 @@ class CYBRangeSliderKnobInPoint: NSControl {
     override func draw(_ dirtyRect: NSRect) {
         super.draw(dirtyRect)
         
-        var knobColor = NSColor(red: 1, green: 0.687, blue: 0, alpha: 1)
+        var knobColor = NSColor(red: 0.922, green: 0.367, blue: 0.230, alpha: 1)
         
         if !isEditabled {
             knobColor = NSColor.darkGray
@@ -67,18 +67,22 @@ class CYBRangeSliderKnobInPoint: NSControl {
         let dragLocation = superview!.convert(event.locationInWindow, from: nil)
         
         // Assign mousePosition variable
-        let mousePosition = dragLocation.x.rounded() + 4
+        let mousePosition = dragLocation.x + 4
         
-        // Check the new position is not less than the minPoint and does not exceed maxPoint
-        guard mousePosition >= minPoint,
-              mousePosition <= maxPoint else { return }
+        // Calcurate new value
+        var newValue = ((mousePosition - minPoint) / (maxPoint - minPoint) * maxValue).rounded()
         
-        // Assign calculated number to _value
-        let newValue = ((mousePosition - minPoint) / (maxPoint - minPoint) * maxValue).rounded()
+        if newValue <= minValue {
+            newValue = minValue
+        }
         
-        // Check the _value does not exceed maxKnob value
-        guard let maxKnobValue = maxKnob?.value,
-              maxKnobValue > newValue else { return }
+        if newValue >= maxValue - 1 {
+            newValue = maxValue - 1
+        }
+ 
+        if newValue >= maxKnob.value {
+            newValue = maxKnob.value - 1
+        }
         
         value = newValue
         
@@ -95,7 +99,7 @@ class CYBRangeSliderKnobInPoint: NSControl {
 
 class CYBRangeSliderKnobOutPoint: NSControl {
     
-    var minKnob: CYBRangeSliderKnobInPoint?
+    var minKnob: CYBRangeSliderKnobInPoint!
     
     var minPoint: CGFloat = 0.0
     var maxPoint: CGFloat = 0.0
@@ -124,7 +128,7 @@ class CYBRangeSliderKnobOutPoint: NSControl {
     override func draw(_ dirtyRect: NSRect) {
         super.draw(dirtyRect)
         
-        var knobColor = NSColor(red: 1, green: 0.687, blue: 0, alpha: 1)
+        var knobColor = NSColor(red: 0.922, green: 0.367, blue: 0.230, alpha: 1)
         
         if !isEditabled {
             knobColor = NSColor.darkGray
@@ -151,18 +155,22 @@ class CYBRangeSliderKnobOutPoint: NSControl {
         
         let dragLocation = superview!.convert(event.locationInWindow, from: nil)
 
-        let mousePosition = dragLocation.x.rounded() - 4
+        let mousePosition = dragLocation.x - 4
         
-        // Check the new position is not less than the minPoint and does not exceed maxPoint
-        guard mousePosition >= minPoint,
-              mousePosition <= maxPoint else { return }
+        // Calcurate new value
+        var newValue = ((mousePosition - minPoint) / (maxPoint - minPoint) * maxValue).rounded()
         
-        // Assign calculated number to _value
-        let newValue = ((mousePosition - minPoint) / (maxPoint - minPoint) * maxValue).rounded()
-    
-        // Check the _value does not exceed maxKnob value
-        guard let minKnobValue = minKnob?.value,
-              minKnobValue < newValue else { return }
+        if newValue <= minValue + 1 {
+            newValue = minValue + 1
+        }
+        
+        if newValue >= maxValue {
+            newValue = maxValue
+        }
+ 
+        if newValue <= minKnob.value {
+            newValue = minKnob.value + 1
+        }
         
         value = newValue
         

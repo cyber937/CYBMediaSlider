@@ -14,7 +14,6 @@ public class CYBMediaSlider: NSControl {
     @IBOutlet var view: NSView!
     
     @IBOutlet var mainSlider: CYBMainSlider!
-    @IBOutlet var rangeSlider: CYBRangeSlider!
 
     @Published public var value: CGFloat = 0.0 {
         didSet {
@@ -24,47 +23,43 @@ public class CYBMediaSlider: NSControl {
     
     @Published public var inPointValue: CGFloat = 0.0 {
         didSet {
-            rangeSlider.inPointValue = inPointValue
+            mainSlider.rangeInKnob.value = inPointValue
         }
     }
     
     @Published public var outPointValue: CGFloat = 100.0 {
         didSet {
-            rangeSlider.outPointValue = outPointValue
+            mainSlider.rangeOutKnob.value = outPointValue
         }
     }
     
     public var minValue: CGFloat = 0 {
         didSet {
             mainSlider.minValue = CGFloat(minValue)
-            rangeSlider.minValue = CGFloat(minValue)
         }
     }
     
     public var maxValue: CGFloat = 100 {
         didSet {
             mainSlider.maxValue = CGFloat(maxValue)
-            rangeSlider.maxValue = CGFloat(maxValue)
         }
     }
     
     public var isEditabled: Bool = true {
         didSet {
             mainSlider.isEditabled = isEditabled
-            rangeSlider.isEditabled = isEditabled
         }
     }
     
     public override var isEnabled: Bool {
         didSet {
             mainSlider.isEnabled = isEnabled
-            rangeSlider.isEnabled = isEnabled
         }
     }
     
-    public var rangeSliderIsEnable: Bool = true{
+    public var rangeSliderIsEnable: Bool = true {
         didSet {
-            rangeSlider.isEnabled = rangeSliderIsEnable
+            //rangeSlider.isEnabled = rangeSliderIsEnable
         }
     }
     
@@ -82,11 +77,11 @@ public class CYBMediaSlider: NSControl {
         mainSlider.target = self
         mainSlider.action = #selector(mainSliderValueChanged)
         
-        rangeSlider.rangeSliderKnobInPoint.target = self
-        rangeSlider.rangeSliderKnobInPoint.action = #selector(inPointValueChanged)
+        mainSlider.rangeInKnob.target = self
+        mainSlider.rangeInKnob.action = #selector(inPointValueChanged)
         
-        rangeSlider.rangeSliderKnobOutPoint.target = self
-        rangeSlider.rangeSliderKnobOutPoint.action = #selector(outPointValueChanged)
+        mainSlider.rangeOutKnob.target = self
+        mainSlider.rangeOutKnob.action = #selector(outPointValueChanged)
  
     }
     
@@ -95,10 +90,10 @@ public class CYBMediaSlider: NSControl {
     }
 
     @objc func inPointValueChanged() {
-        inPointValue = rangeSlider.rangeSliderKnobInPoint.value
+        inPointValue = mainSlider.rangeInKnob.value
     }
 
     @objc func outPointValueChanged() {
-        outPointValue = rangeSlider.rangeSliderKnobOutPoint.value
+        outPointValue = mainSlider.rangeOutKnob.value
     }
 }

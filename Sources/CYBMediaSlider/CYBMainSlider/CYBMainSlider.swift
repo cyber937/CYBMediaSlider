@@ -8,17 +8,43 @@
 
 import Cocoa
 
-class CYBMainSlider: NSControl, CYBRangeKnobsDelegate {
+class CYBMainSlider: NSControl {
+    
+    var mouseRightPlaceToClicked: Bool = false
     
     var mainSliderLine: CYBMainSliderLine!
     var mainSliderknob: CYBMainSliderKnob!
+    var rangeInKnob: CYBRangeSliderKnobInPoint!
+    var rangeOutKnob: CYBRangeSliderKnobOutPoint!
     
-    var minValue: CGFloat = 0
-    var maxValue: CGFloat = 100 // default max value is 100
+    var minPoint: CGFloat = 0 {
+        didSet {
+            rangeInKnob.minPoint = minPoint
+            rangeOutKnob.minPoint = minPoint
+        }
+    }
     
-    var minPoint: CGFloat = 0
-    var maxPoint: CGFloat = 0 // default max point is 100
+    var maxPoint: CGFloat = 0 {
+        didSet {
+            rangeInKnob.maxPoint = maxPoint
+            rangeOutKnob.maxPoint = maxPoint
+        }
+    }
 
+    var minValue: CGFloat = 0 {
+        didSet {
+            rangeInKnob.minValue = minValue
+            rangeOutKnob.minValue = minValue
+        }
+    }
+    
+    var maxValue: CGFloat = 100 {
+        didSet {
+            rangeInKnob.maxValue = maxValue
+            rangeOutKnob.maxValue = maxValue
+        }
+    }
+    
     var isEditabled: Bool = true {
         didSet {
             mainSliderknob.isEditabled = isEditabled
@@ -44,13 +70,16 @@ class CYBMainSlider: NSControl, CYBRangeKnobsDelegate {
     override var frame: NSRect {
         didSet {
             // Calcurate maxPoint (subtract 'minPoint' and '8' from this view's frame)
-            maxPoint = frame.size.width - minPoint - 8.0
+            maxPoint = frame.size.width - minPoint
 
             // Assign the maxPoint to the width of
-            mainSliderLine.frame.size.width = maxPoint - 8.0
+            mainSliderLine.frame.size.width = maxPoint - minPoint
             
             // Update the location of mainSliderKnob
             mainSliderknob.frame.origin.x = ((maxPoint - minPoint) * (value / maxValue) + minPoint).rounded() - 4
+            
+            rangeInKnob.updateKnobPosition()
+            rangeOutKnob.updateKnobPosition()
         }
     }
     
@@ -60,24 +89,47 @@ class CYBMainSlider: NSControl, CYBRangeKnobsDelegate {
         
         minPoint = 8.0
         
-        mainSliderLine = CYBMainSliderLine(frame: NSMakeRect(minPoint, 3, 100, 5))
-        mainSliderknob = CYBMainSliderKnob(frame: NSMakeRect(0.0, 0.0, 8.0, 13.5))
-        
+        mainSliderLine = CYBMainSliderLine(frame: NSMakeRect(minPoint, 9.5, 100, 5))
         addSubview(mainSliderLine)
+        
+        
+        rangeInKnob = CYBRangeSliderKnobInPoint(frame: NSMakeRect(0, 1, 8, 8))
+        rangeInKnob.minPoint = minPoint
+        
+        rangeOutKnob = CYBRangeSliderKnobOutPoint(frame: NSMakeRect(0, 1, 8, 8))
+        rangeOutKnob.minPoint = minPoint
+
+        rangeInKnob.maxKnob = rangeOutKnob
+        rangeOutKnob.minKnob = rangeInKnob
+        
+        addSubview(rangeInKnob)
+        addSubview(rangeOutKnob)
+        
+        
+        mainSliderknob = CYBMainSliderKnob(frame: NSMakeRect(0.0, 7, 8.0, 12))
+        
         addSubview(mainSliderknob)
     }
     
-    
-    
     override func mouseDown(with event: NSEvent) {
-        if isEditabled {
-            updatingSliderKnobPotision(with: event)
+        let clickedLocation = self.convert(event.locationInWindow, from: nil)
+        let clickedMouseYPosition =  clickedLocation.y
+        
+        if clickedMouseYPosition >= 7 {
+            mouseRightPlaceToClicked = true
         }
     }
     
+    override func mouseUp(with event: NSEvent) {
+        mouseRightPlaceToClicked = false
+    }
+    
     override func mouseDragged(with event: NSEvent) {
-        if isEditabled {
-            updatingSliderKnobPotision(with: event)
+        
+        if mouseRightPlaceToClicked {
+            if isEditabled {
+                updatingSliderKnobPotision(with: event)
+            }
         }
     }
     
@@ -87,35 +139,23 @@ class CYBMainSlider: NSControl, CYBRangeKnobsDelegate {
         let dragLocation = self.convert(event.locationInWindow, from: nil)
         
         // Assign mousePosition variable
-        let mousePosition = dragLocation.x.rounded()
+        let mouseXPosition = dragLocation.x
         
-        // Make mousePosition's limit in between "minPoint" and "maxPoint"
-        guard mousePosition >= minPoint,
-              mousePosition <= maxPoint else { return }
         
-        // Assign _value
-        var newValue = ((mousePosition - minPoint)  /  (maxPoint - minPoint) * maxValue).rounded()
+        var newValue = ((mouseXPosition - minPoint)  /  (maxPoint - minPoint) * maxValue).rounded()
         
-        // some comments
-        if newValue == maxValue {
-            newValue = maxValue - 1
-            return
+        if newValue <= minValue {
+            newValue = 0
         }
-
+        
+        if newValue >= maxValue - 1 {
+            newValue = maxValue - 1
+        }
+        
         value = newValue
         
         mainSliderknob.frame.origin.x = ((maxPoint - minPoint) * (value / maxValue) + minPoint).rounded() - 4
 
         let _ = sendAction(action, to: target)
-    }
-    
-    func didUpdateMinKnobPosition(_ position: CGFloat) {
-        mainSliderLine.minKnobPosition = position
-        mainSliderLine.needsDisplay = true
-    }
-
-    func didUpdateMaxKnobPosition(_ position: CGFloat) {
-        mainSliderLine.maxKnobPosition = position
-        mainSliderLine.needsDisplay = true
     }
 }
