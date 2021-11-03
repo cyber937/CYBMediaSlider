@@ -59,11 +59,10 @@ public class CYBMediaSlider: NSControl {
     
     public var rangeSliderIsEnable: Bool = true {
         didSet {
-            //rangeSlider.isEnabled = rangeSliderIsEnable
+                mainSlider.rangeInKnob.isEnabled = rangeSliderIsEnable
+                mainSlider.rangeOutKnob.isEnabled = rangeSliderIsEnable
         }
     }
-    
-    public weak var delegate: CYBMediaSliderDelegate?
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
