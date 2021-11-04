@@ -12,7 +12,6 @@ import Cocoa
 public class CYBMediaSlider: NSControl {
     
     @IBOutlet var view: NSView!
-    
     @IBOutlet var mainSlider: CYBMainSlider!
 
     @Published public var value: CGFloat = 0.0 {

@@ -8,14 +8,14 @@
 
 import Cocoa
 
-class CYBMainSlider: NSControl {
+public class CYBMainSlider: NSControl {
     
     var mouseRightPlaceToClicked: Bool = false
     
     var mainSliderLine: CYBMainSliderLine!
     var mainSliderknob: CYBMainSliderKnob!
-    var rangeInKnob: CYBRangeSliderKnobInPoint!
-    var rangeOutKnob: CYBRangeSliderKnobOutPoint!
+    public var rangeInKnob: CYBRangeSliderKnobInPoint!
+    public var rangeOutKnob: CYBRangeSliderKnobOutPoint!
     
     var minPoint: CGFloat = 0 {
         didSet {
