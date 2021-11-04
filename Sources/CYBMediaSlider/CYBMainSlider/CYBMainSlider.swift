@@ -14,8 +14,8 @@ public class CYBMainSlider: NSControl {
     
     var mainSliderLine: CYBMainSliderLine!
     var mainSliderknob: CYBMainSliderKnob!
-    public var rangeInKnob: CYBRangeSliderKnobInPoint!
-    public var rangeOutKnob: CYBRangeSliderKnobOutPoint!
+    var rangeInKnob: CYBRangeSliderKnobInPoint!
+    var rangeOutKnob: CYBRangeSliderKnobOutPoint!
     
     var minPoint: CGFloat = 0 {
         didSet {
@@ -52,7 +52,7 @@ public class CYBMainSlider: NSControl {
         }
     }
     
-    override var isEnabled: Bool {
+    public override var isEnabled: Bool {
         didSet {
             mainSliderknob.isEnabled = isEnabled
             mainSliderLine.isEnabled = isEnabled
@@ -67,7 +67,7 @@ public class CYBMainSlider: NSControl {
     }
     
     // Everytime when this view's size is updated, this method is triggered.
-    override var frame: NSRect {
+    public override var frame: NSRect {
         didSet {
             // Calcurate maxPoint (subtract 'minPoint' and '8' from this view's frame)
             maxPoint = frame.size.width - minPoint
@@ -110,7 +110,7 @@ public class CYBMainSlider: NSControl {
         addSubview(mainSliderknob)
     }
     
-    override func mouseDown(with event: NSEvent) {
+    public override func mouseDown(with event: NSEvent) {
         if isEditabled {
             let clickedLocation = self.convert(event.locationInWindow, from: nil)
             let clickedMouseYPosition =  clickedLocation.y
@@ -121,13 +121,13 @@ public class CYBMainSlider: NSControl {
         }
     }
     
-    override func mouseUp(with event: NSEvent) {
+    public override func mouseUp(with event: NSEvent) {
         if isEditabled {
             mouseRightPlaceToClicked = false
         }
     }
     
-    override func mouseDragged(with event: NSEvent) {
+    public override func mouseDragged(with event: NSEvent) {
         if isEditabled {
             if mouseRightPlaceToClicked {
                 if isEditabled {
