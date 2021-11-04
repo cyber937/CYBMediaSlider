@@ -12,12 +12,14 @@ import Cocoa
 public class CYBMediaSlider: NSControl {
     
     @IBOutlet var view: NSView!
-    @IBOutlet public var mainSlider: CYBMainSlider!
+    @IBOutlet var mainSlider: CYBMainSlider!
 
     @Published public var value: CGFloat = 0.0 {
         didSet {
             mainSlider.value = value
-            let _ = sendAction(action, to: target)
+            if mainSlider.mouseRightPlaceToClicked {
+                let _ = sendAction(action, to: target)
+            }
         }
     }
     

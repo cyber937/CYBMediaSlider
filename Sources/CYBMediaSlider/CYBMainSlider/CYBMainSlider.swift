@@ -8,7 +8,7 @@
 
 import Cocoa
 
-public class CYBMainSlider: NSControl {
+class CYBMainSlider: NSControl {
     
     var mouseRightPlaceToClicked: Bool = false
     
@@ -52,7 +52,7 @@ public class CYBMainSlider: NSControl {
         }
     }
     
-    public override var isEnabled: Bool {
+    override var isEnabled: Bool {
         didSet {
             mainSliderknob.isEnabled = isEnabled
             mainSliderLine.isEnabled = isEnabled
@@ -67,7 +67,7 @@ public class CYBMainSlider: NSControl {
     }
     
     // Everytime when this view's size is updated, this method is triggered.
-    public override var frame: NSRect {
+    override var frame: NSRect {
         didSet {
             // Calcurate maxPoint (subtract 'minPoint' and '8' from this view's frame)
             maxPoint = frame.size.width - minPoint
