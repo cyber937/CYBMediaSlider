@@ -17,6 +17,7 @@ public class CYBMediaSlider: NSControl {
     @Published public var value: CGFloat = 0.0 {
         didSet {
             mainSlider.value = value
+            let _ = sendAction(action, to: target)
         }
     }
     
