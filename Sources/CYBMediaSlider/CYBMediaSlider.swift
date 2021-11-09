@@ -8,7 +8,6 @@
 
 import Cocoa
 
-@available(macOS 10.15, *)
 public class CYBMediaSlider: NSControl {
     
     @IBOutlet var view: NSView!
