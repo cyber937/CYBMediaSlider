@@ -89,7 +89,7 @@ class CYBMainSlider: NSControl {
         
         minPoint = 8.0
         
-        mainSliderLine = CYBMainSliderLine(frame: NSMakeRect(minPoint, 9.5, 100, 5))
+        mainSliderLine = CYBMainSliderLine(frame: NSMakeRect(minPoint, 11, 100, 3.5))
         addSubview(mainSliderLine)
         
         

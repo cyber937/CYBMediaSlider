@@ -24,8 +24,6 @@ class CYBMainSliderLine: NSView {
         }
     }
     
-    //var lightGray = NSColor(red: 0.619, green: 0.619, blue: 0.619, alpha: 1)
-    
     override func draw(_ dirtyRect: NSRect) {
         super.draw(dirtyRect)
         
@@ -42,11 +40,5 @@ class CYBMainSliderLine: NSView {
         }
 
         bounds.fill()
-   
-        let minRect = NSMakeRect(0, 0, minKnobPosition, 15)
-        minRect.fill()
-
-        let maxRect = NSMakeRect(self.frame.size.width + 8 - maxKnobPosition, 0, self.frame.size.width, 5)
-        maxRect.fill()
     }
 }
