@@ -14,37 +14,34 @@ class CYBMainSliderLine: NSView {
 
     var isEditabled: Bool = true {
         didSet {
-            needsDisplay = isEditabled
+            needsDisplay = true
         }
     }
 
     var isEnabled: Bool = true {
         didSet {
-            needsDisplay = isEditabled
+            needsDisplay = true
         }
     }
+    
+    //var lightGray = NSColor(red: 0.619, green: 0.619, blue: 0.619, alpha: 1)
     
     override func draw(_ dirtyRect: NSRect) {
         super.draw(dirtyRect)
         
-        var lightGray = NSColor(red: 0.619, green: 0.619, blue: 0.619, alpha: 1)
-        
-        if !isEditabled {
-            lightGray = NSColor.gray.withAlphaComponent(0.8)
-        }
-        
         guard isEnabled else {
-            NSColor.darkGray.setFill()
+            NSColor.unemphasizedSelectedContentBackgroundColor.setFill()
             bounds.fill()
             return
         }
         
-        lightGray.setFill()
+        if isEditabled {
+            NSColor.gray.setFill()
+        } else {
+            NSColor.lightGray.setFill()
+        }
+
         bounds.fill()
-        
-        NSColor.darkGray.setFill()
-        
-        guard isEnabled else { return }
    
         let minRect = NSMakeRect(0, 0, minKnobPosition, 15)
         minRect.fill()

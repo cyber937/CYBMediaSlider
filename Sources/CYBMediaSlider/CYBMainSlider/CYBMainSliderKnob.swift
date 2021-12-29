@@ -24,17 +24,16 @@ class CYBMainSliderKnob: NSView {
     override func draw(_ dirtyRect: NSRect) {
         super.draw(dirtyRect)
         
-        var knobColor = NSColor(red: 1, green: 0.687, blue: 0, alpha: 1)
+        guard isEnabled else { return }
         
-        if !isEditabled {
-            knobColor = NSColor.gray
+        var knobColor: NSColor
+        
+        if isEditabled {
+            knobColor = NSColor(red: 1, green: 0.687, blue: 0, alpha: 1)
+        } else {
+            knobColor = NSColor.lightGray
         }
-        
-        if !isEnabled {
-            knobColor = NSColor(red: 1, green: 0.687, blue: 0, alpha: 0)
-            return
-        }
-        
+
         knobColor.set()
         
         let mainSliderKnobPath = NSBezierPath()
