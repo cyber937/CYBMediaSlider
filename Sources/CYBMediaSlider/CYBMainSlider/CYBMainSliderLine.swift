@@ -28,7 +28,7 @@ class CYBMainSliderLine: NSView {
         super.draw(dirtyRect)
         
         guard isEnabled else {
-            NSColor.unemphasizedSelectedContentBackgroundColor.setFill()
+            NSColor.disabledControlTextColor.setFill()
             bounds.fill()
             return
         }
