@@ -59,10 +59,16 @@ class CYBMainSlider: NSControl {
         }
     }
 
+    var roundedValue: Bool = false
+    
     // This value is actual value.
     var value : CGFloat = 0 {
         didSet {
-            mainSliderknob.frame.origin.x = ((maxPoint - minPoint) * (value / maxValue) + minPoint).rounded() - 4
+            if roundedValue {
+                mainSliderknob.frame.origin.x = ((maxPoint - minPoint) * (value / maxValue) + minPoint).rounded() - 4
+            } else {
+                mainSliderknob.frame.origin.x = ((maxPoint - minPoint) * (value / maxValue) + minPoint) - 4
+            }
         }
     }
     
@@ -76,7 +82,11 @@ class CYBMainSlider: NSControl {
             mainSliderLine.frame.size.width = maxPoint - minPoint
             
             // Update the location of mainSliderKnob
-            mainSliderknob.frame.origin.x = ((maxPoint - minPoint) * (value / maxValue) + minPoint).rounded() - 4
+            if roundedValue {
+                mainSliderknob.frame.origin.x = ((maxPoint - minPoint) * (value / maxValue) + minPoint).rounded() - 4
+            } else {
+                mainSliderknob.frame.origin.x = ((maxPoint - minPoint) * (value / maxValue) + minPoint) - 4
+            }
             
             rangeInKnob.updateKnobPosition()
             rangeOutKnob.updateKnobPosition()
@@ -91,7 +101,6 @@ class CYBMainSlider: NSControl {
         
         mainSliderLine = CYBMainSliderLine(frame: NSMakeRect(minPoint, 11, 100, 3.5))
         addSubview(mainSliderLine)
-        
         
         rangeInKnob = CYBRangeSliderKnobInPoint(frame: NSMakeRect(0, 1, 8, 8))
         rangeInKnob.minPoint = minPoint
@@ -145,8 +154,13 @@ class CYBMainSlider: NSControl {
         // Assign mousePosition variable
         let mouseXPosition = dragLocation.x
         
+        var newValue: CGFloat
         
-        var newValue = ((mouseXPosition - minPoint)  /  (maxPoint - minPoint) * maxValue).rounded()
+        if roundedValue {
+            newValue = ((mouseXPosition - minPoint)  /  (maxPoint - minPoint) * maxValue).rounded()
+        } else {
+            newValue = ((mouseXPosition - minPoint)  /  (maxPoint - minPoint) * maxValue)
+        }
         
         if newValue <= minValue {
             newValue = 0
@@ -158,7 +172,11 @@ class CYBMainSlider: NSControl {
         
         value = newValue
         
-        mainSliderknob.frame.origin.x = ((maxPoint - minPoint) * (value / maxValue) + minPoint).rounded() - 4
+        if roundedValue {
+            mainSliderknob.frame.origin.x = ((maxPoint - minPoint) * (value / maxValue) + minPoint).rounded() - 4
+        } else {
+            mainSliderknob.frame.origin.x = ((maxPoint - minPoint) * (value / maxValue) + minPoint) - 4
+        }
 
         let _ = sendAction(action, to: target)
     }

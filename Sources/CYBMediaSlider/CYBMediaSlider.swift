@@ -59,6 +59,12 @@ public class CYBMediaSlider: NSControl {
         }
     }
     
+    public var roundedValue: Bool = false {
+        didSet {
+            mainSlider.roundedValue = roundedValue
+        }
+    }
+    
     public var rangeSliderIsEnable: Bool = true {
         didSet {
                 mainSlider.rangeInKnob.isEnabled = rangeSliderIsEnable
