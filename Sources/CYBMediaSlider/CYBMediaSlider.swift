@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import Combine
 
 public class CYBMediaSlider: NSControl {
     
@@ -34,13 +35,13 @@ public class CYBMediaSlider: NSControl {
         }
     }
     
-    public var minValue: CGFloat = 0 {
+    public var minValue: CGFloat = 0.0 {
         didSet {
             mainSlider.minValue = CGFloat(minValue)
         }
     }
     
-    public var maxValue: CGFloat = 100 {
+    public var maxValue: CGFloat = 100.0 {
         didSet {
             mainSlider.maxValue = CGFloat(maxValue)
         }

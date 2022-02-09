@@ -13,32 +13,32 @@ class CYBMainSlider: NSControl {
     var mouseRightPlaceToClicked: Bool = false
     
     var mainSliderLine: CYBMainSliderLine!
-    var mainSliderknob: CYBMainSliderKnob!
+    var mainSliderKnob: CYBMainSliderKnob!
     var rangeInKnob: CYBRangeSliderKnobInPoint!
     var rangeOutKnob: CYBRangeSliderKnobOutPoint!
     
-    var minPoint: CGFloat = 0 {
+    var minPoint: CGFloat = 0.0 {
         didSet {
             rangeInKnob.minPoint = minPoint
             rangeOutKnob.minPoint = minPoint
         }
     }
     
-    var maxPoint: CGFloat = 0 {
+    var maxPoint: CGFloat = 0.0 {
         didSet {
             rangeInKnob.maxPoint = maxPoint
             rangeOutKnob.maxPoint = maxPoint
         }
     }
 
-    var minValue: CGFloat = 0 {
+    var minValue: CGFloat = 0.0 {
         didSet {
             rangeInKnob.minValue = minValue
             rangeOutKnob.minValue = minValue
         }
     }
     
-    var maxValue: CGFloat = 100 {
+    var maxValue: CGFloat = 100.0 {
         didSet {
             rangeInKnob.maxValue = maxValue
             rangeOutKnob.maxValue = maxValue
@@ -47,14 +47,14 @@ class CYBMainSlider: NSControl {
     
     var isEditabled: Bool = true {
         didSet {
-            mainSliderknob.isEditabled = isEditabled
+            mainSliderKnob.isEditabled = isEditabled
             mainSliderLine.isEditabled = isEditabled
         }
     }
     
     override var isEnabled: Bool {
         didSet {
-            mainSliderknob.isEnabled = isEnabled
+            mainSliderKnob.isEnabled = isEnabled
             mainSliderLine.isEnabled = isEnabled
         }
     }
@@ -62,12 +62,12 @@ class CYBMainSlider: NSControl {
     var roundedValue: Bool = false
     
     // This value is actual value.
-    var value : CGFloat = 0 {
+    var value : CGFloat = 0.0 {
         didSet {
             if roundedValue {
-                mainSliderknob.frame.origin.x = ((maxPoint - minPoint) * (value / maxValue) + minPoint).rounded() - 4
+                mainSliderKnob.frame.origin.x = ((maxPoint - minPoint) * (value / maxValue) + minPoint).rounded() - 4
             } else {
-                mainSliderknob.frame.origin.x = ((maxPoint - minPoint) * (value / maxValue) + minPoint) - 4
+                mainSliderKnob.frame.origin.x = ((maxPoint - minPoint) * (value / maxValue) + minPoint) - 4
             }
         }
     }
@@ -83,9 +83,9 @@ class CYBMainSlider: NSControl {
             
             // Update the location of mainSliderKnob
             if roundedValue {
-                mainSliderknob.frame.origin.x = ((maxPoint - minPoint) * (value / maxValue) + minPoint).rounded() - 4
+                mainSliderKnob.frame.origin.x = ((maxPoint - minPoint) * (value / maxValue) + minPoint).rounded() - 4
             } else {
-                mainSliderknob.frame.origin.x = ((maxPoint - minPoint) * (value / maxValue) + minPoint) - 4
+                mainSliderKnob.frame.origin.x = ((maxPoint - minPoint) * (value / maxValue) + minPoint) - 4
             }
             
             rangeInKnob.updateKnobPosition()
@@ -114,9 +114,9 @@ class CYBMainSlider: NSControl {
         addSubview(rangeInKnob)
         addSubview(rangeOutKnob)
         
-        mainSliderknob = CYBMainSliderKnob(frame: NSMakeRect(0.0, 7, 8.0, 13))
+        mainSliderKnob = CYBMainSliderKnob(frame: NSMakeRect(0.0, 7, 8.0, 13))
         
-        addSubview(mainSliderknob)
+        addSubview(mainSliderKnob)
     }
     
     public override func mouseDown(with event: NSEvent) {
@@ -173,9 +173,9 @@ class CYBMainSlider: NSControl {
         value = newValue
         
         if roundedValue {
-            mainSliderknob.frame.origin.x = ((maxPoint - minPoint) * (value / maxValue) + minPoint).rounded() - 4
+            mainSliderKnob.frame.origin.x = ((maxPoint - minPoint) * (value / maxValue) + minPoint).rounded() - 4
         } else {
-            mainSliderknob.frame.origin.x = ((maxPoint - minPoint) * (value / maxValue) + minPoint) - 4
+            mainSliderKnob.frame.origin.x = ((maxPoint - minPoint) * (value / maxValue) + minPoint) - 4
         }
 
         let _ = sendAction(action, to: target)

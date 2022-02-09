@@ -9,8 +9,8 @@ import Cocoa
 
 class CYBMainSliderLine: NSView {
 
-    var minKnobPosition: CGFloat = 0
-    var maxKnobPosition: CGFloat = 0
+    var minKnobPosition: CGFloat = 0.0
+    var maxKnobPosition: CGFloat = 0.0
 
     var isEditabled: Bool = true {
         didSet {
