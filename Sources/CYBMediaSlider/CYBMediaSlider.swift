@@ -49,14 +49,15 @@ public class CYBMediaSlider: NSControl {
     
     public var isEditabled: Bool = true {
         didSet {
-            mainSlider.isEditabled = isEditabled
+            mainSlider.mainSliderKnob.isEditabled = isEditabled
         }
     }
     
     public override var isEnabled: Bool {
         didSet {
             mainSlider.isEditabled = isEnabled
-            mainSlider.isEnabled = isEnabled
+            mainSlider.mainSliderKnob.isHidden = !isEnabled
+            mainSlider.mainSliderKnob.isEditabled = isEditabled
         }
     }
     
@@ -104,4 +105,60 @@ public class CYBMediaSlider: NSControl {
     @objc func outPointValueChanged() {
         outPointValue = mainSlider.rangeOutKnob.value
     }
+    
+    public override func accessibilityRole() -> NSAccessibility.Role? {
+        return NSAccessibility.Role.slider
+    }
+
+    public override func isAccessibilityElement() -> Bool {
+        true
+    }
+
+    public override func isAccessibilityEnabled() -> Bool {
+        true
+    }
+    
+    public override func accessibilityLabel() -> String? {
+        return NSLocalizedString("CYBMediaSlider", comment: "accessibility label of the CYBMediaSldier")
+    }
+
+    public override func accessibilityChildren() -> [Any]? {
+        return [mainSlider!.mainSliderKnob!]
+    }
+
+    public override func accessibilityMaxValue() -> Any? {
+        return maxValue
+    }
+
+    public override func accessibilityMinValue() -> Any? {
+        return minValue
+    }
+
+    public override func setAccessibilityValue(_ accessibilityValue: Any?) {
+
+        guard let value = accessibilityValue as? CGFloat else { return }
+
+        print(value)
+
+        self.value = value
+    }
+
+
+    public override func accessibilityPerformDecrement() -> Bool {
+        return true
+    }
+
+    public override func accessibilityPerformIncrement() -> Bool {
+        return true
+    }
+
+    public override func accessibilityValue() -> Any? {
+        return self.value
+    }
+    
+    public override func accessibilityOrientation() -> NSAccessibilityOrientation {
+        return .horizontal
+    }
 }
+
+

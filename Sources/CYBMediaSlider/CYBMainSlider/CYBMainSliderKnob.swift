@@ -54,4 +54,17 @@ class CYBMainSliderKnob: NSView {
         rectangle3Path.close()
         rectangle3Path.fill()
     }
+    
+    override func accessibilityRole() -> NSAccessibility.Role? {
+        return NSAccessibility.Role.valueIndicator
+    }
+    
+    override func isAccessibilityElement() -> Bool {
+        true
+    }
+   
+    override func isAccessibilityEnabled() -> Bool {
+        return isEnabled
+    }
+
 }

@@ -180,4 +180,20 @@ class CYBMainSlider: NSControl {
 
         let _ = sendAction(action, to: target)
     }
+    
+//    override func accessibilityRole() -> NSAccessibility.Role? {
+//        return NSAccessibility.Role.layoutArea
+//    }
+//    
+//    override func isAccessibilityElement() -> Bool {
+//        true
+//    }
+//    
+//    override func accessibilityLabel() -> String? {
+//        return NSLocalizedString("CYBMainSlider", comment: "accessibility label of the CYBMainSldier")
+//    }
+//    
+//    override func accessibilityChildren() -> [Any]? {
+//        return [mainSliderKnob!]
+//    }
 }
