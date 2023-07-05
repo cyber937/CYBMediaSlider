@@ -45,20 +45,19 @@ class CYBMainSlider: NSControl {
         }
     }
     
-    var isEditabled: Bool = true {
-        didSet {
-            mainSliderKnob.isEditabled = isEditabled
-            mainSliderLine.isEditabled = isEditabled
-        }
-    }
-    
     override var isEnabled: Bool {
         didSet {
-            mainSliderKnob.isEnabled = isEnabled
+            mainSliderKnob.isHidden = !isEnabled
             mainSliderLine.isEnabled = isEnabled
         }
     }
 
+    var isEditabled: Bool = true {
+        didSet {
+            mainSliderLine.isEditabled = isEditabled
+        }
+    }
+    
     var roundedValue: Bool = false
     
     // This value is actual value.
@@ -120,7 +119,7 @@ class CYBMainSlider: NSControl {
     }
     
     public override func mouseDown(with event: NSEvent) {
-        if isEditabled {
+        if isEnabled && isEditabled {
             let clickedLocation = self.convert(event.locationInWindow, from: nil)
             let clickedMouseYPosition =  clickedLocation.y
             
@@ -131,15 +130,15 @@ class CYBMainSlider: NSControl {
     }
     
     public override func mouseUp(with event: NSEvent) {
-        if isEditabled {
+        if isEnabled && isEditabled {
             mouseRightPlaceToClicked = false
         }
     }
     
     public override func mouseDragged(with event: NSEvent) {
-        if isEditabled {
+        if isEnabled && isEditabled {
             if mouseRightPlaceToClicked {
-                if isEditabled {
+                if isEnabled {
                     updatingSliderKnobPotision(with: event)
                 }
             }

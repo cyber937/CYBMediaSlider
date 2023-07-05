@@ -7,7 +7,7 @@
 
 import Cocoa
 
-class CYBMainSliderLine: NSView {
+class CYBMainSliderLine: NSControl {
 
     var minKnobPosition: CGFloat = 0.0
     var maxKnobPosition: CGFloat = 0.0
@@ -18,7 +18,7 @@ class CYBMainSliderLine: NSView {
         }
     }
 
-    var isEnabled: Bool = true {
+    override var isEnabled: Bool {
         didSet {
             needsDisplay = true
         }
@@ -27,18 +27,13 @@ class CYBMainSliderLine: NSView {
     override func draw(_ dirtyRect: NSRect) {
         super.draw(dirtyRect)
         
-        guard isEnabled else {
+        guard isEnabled && isEditabled else {
             NSColor.disabledControlTextColor.setFill()
             bounds.fill()
             return
         }
         
-        if isEditabled {
-            NSColor.gray.setFill()
-        } else {
-            NSColor.lightGray.setFill()
-        }
-
+        NSColor.gray.setFill()
         bounds.fill()
     }
 }

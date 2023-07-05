@@ -7,7 +7,7 @@
 
 import Cocoa
 
-class CYBMainSliderKnob: NSView {
+class CYBMainSliderKnob: NSControl {
     
     var isEditabled: Bool = true {
         didSet {
@@ -15,16 +15,8 @@ class CYBMainSliderKnob: NSView {
         }
     }
     
-    var isEnabled: Bool = true {
-        didSet {
-            needsDisplay = true
-        }
-    }
-    
     override func draw(_ dirtyRect: NSRect) {
         super.draw(dirtyRect)
-        
-        guard isEnabled else { return }
         
         var knobColor: NSColor
         

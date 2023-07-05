@@ -50,14 +50,15 @@ public class CYBMediaSlider: NSControl {
     public var isEditabled: Bool = true {
         didSet {
             mainSlider.mainSliderKnob.isEditabled = isEditabled
+            mainSlider.isEditabled = isEditabled
         }
     }
     
     public override var isEnabled: Bool {
         didSet {
-            mainSlider.isEditabled = isEnabled
-            mainSlider.mainSliderKnob.isHidden = !isEnabled
-            mainSlider.mainSliderKnob.isEditabled = isEditabled
+            mainSlider.isEnabled = isEnabled
+            //mainSlider.mainSliderKnob.isHidden = !isEnabled
+            //mainSlider.mainSliderKnob.isEnabled = isEnabled
         }
     }
     
@@ -92,6 +93,7 @@ public class CYBMediaSlider: NSControl {
         mainSlider.rangeOutKnob.target = self
         mainSlider.rangeOutKnob.action = #selector(outPointValueChanged)
  
+        isEnabled = true
     }
     
     @objc func mainSliderValueChanged() {
