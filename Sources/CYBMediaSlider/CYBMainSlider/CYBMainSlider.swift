@@ -101,10 +101,10 @@ class CYBMainSlider: NSControl {
         mainSliderLine = CYBMainSliderLine(frame: NSMakeRect(minPoint, 11, 100, 3.5))
         addSubview(mainSliderLine)
         
-        rangeInKnob = CYBRangeSliderKnobInPoint(frame: NSMakeRect(0, 1, 8, 8))
+        rangeInKnob = CYBRangeSliderKnobInPoint(frame: NSMakeRect(0, 4, 8, 8))
         rangeInKnob.minPoint = minPoint
         
-        rangeOutKnob = CYBRangeSliderKnobOutPoint(frame: NSMakeRect(0, 1, 8, 8))
+        rangeOutKnob = CYBRangeSliderKnobOutPoint(frame: NSMakeRect(0, 4, 8, 8))
         rangeOutKnob.minPoint = minPoint
 
         rangeInKnob.maxKnob = rangeOutKnob

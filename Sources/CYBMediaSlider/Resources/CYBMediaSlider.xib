@@ -15,22 +15,23 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="c22-O7-iKe">
-            <rect key="frame" x="0.0" y="0.0" width="538" height="20"/>
+            <rect key="frame" x="0.0" y="0.0" width="538" height="18"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
             <subviews>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="a1l-fZ-aKR" customClass="CYBMainSlider" customModule="CYBMediaSlider">
-                    <rect key="frame" x="0.0" y="0.0" width="538" height="20"/>
+                    <rect key="frame" x="0.0" y="0.0" width="538" height="18"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="20" id="Hla-ko-C7J"/>
+                        <constraint firstAttribute="height" constant="18" id="Hla-ko-C7J"/>
                     </constraints>
                 </customView>
             </subviews>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="a1l-fZ-aKR" secondAttribute="trailing" id="3TQ-d5-7mq"/>
+                <constraint firstItem="a1l-fZ-aKR" firstAttribute="centerY" secondItem="c22-O7-iKe" secondAttribute="centerY" id="DpT-Dq-895"/>
                 <constraint firstItem="a1l-fZ-aKR" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" id="HVQ-kd-VxQ"/>
                 <constraint firstAttribute="bottom" secondItem="a1l-fZ-aKR" secondAttribute="bottom" id="mTA-fl-o63"/>
             </constraints>
-            <point key="canvasLocation" x="253" y="30"/>
+            <point key="canvasLocation" x="251" y="25.5"/>
         </customView>
     </objects>
 </document>
