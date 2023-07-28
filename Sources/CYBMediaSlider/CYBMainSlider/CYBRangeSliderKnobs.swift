@@ -45,10 +45,10 @@ class CYBRangeSliderKnobInPoint: NSControl {
         }
         
         let bezierPath = NSBezierPath()
-        bezierPath.move(to: NSPoint(x: 0, y: 7))
-        bezierPath.line(to: NSPoint(x: 8, y: 7))
+        bezierPath.move(to: NSPoint(x: 0, y: 6))
+        bezierPath.line(to: NSPoint(x: 8, y: 6))
         bezierPath.line(to: NSPoint(x: 8, y: 0))
-        bezierPath.line(to: NSPoint(x: 0, y: 7))
+        bezierPath.line(to: NSPoint(x: 0, y: 6))
         bezierPath.close()
         knobColor.setFill()
         bezierPath.fill()
@@ -135,10 +135,10 @@ class CYBRangeSliderKnobOutPoint: NSControl {
         }
         
         let bezier2Path = NSBezierPath()
-        bezier2Path.move(to: NSPoint(x: 8, y: 7))
-        bezier2Path.line(to: NSPoint(x: 0, y: 7))
+        bezier2Path.move(to: NSPoint(x: 8, y: 6))
+        bezier2Path.line(to: NSPoint(x: 0, y: 6))
         bezier2Path.line(to: NSPoint(x: 0, y: 0))
-        bezier2Path.line(to: NSPoint(x: 8, y: 7))
+        bezier2Path.line(to: NSPoint(x: 8, y: 6))
         bezier2Path.close()
         knobColor.setFill()
         bezier2Path.fill()
